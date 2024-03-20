@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import InputMask from 'react-input-mask';
 import meninoLendo from '../assets/lendoLivros.svg'
-import axios from 'axios';
 import '../App.css'
 
 function CadAluno() {
@@ -82,7 +81,7 @@ function CadAluno() {
     
     <div className="min-h-screen flex items-center justify-center bg-indigo-950 sm:p-5 z-0">
 
-      <div id='noise' className='w-screen h-screen fixed z-10 opacity-20 pointer-events-nonex '>
+      <div id='noise' className='w-screen h-screen fixed z-10 opacity-20 pointer-events-none '>
 
       </div>
 
@@ -94,9 +93,11 @@ function CadAluno() {
 
         <form onSubmit={sendCad} className='w-full h-full flex flex-col justify-center'>
 
-          <span className='inline-block'>
-            <p className='text-3xl mb-5 border-b-4 border-slate-700 inline-block'>Cadastro do aluno</p>
-          </span> 
+          <span className="flex justify-center">
+            <span className='inline-block'>
+              <p className='text-3xl mb-5 border-b-4 border-slate-700 inline-block text-center'>Cadastro do aluno</p>
+            </span>
+          </span>
 
             <div className='w-full flex flex-col space-y-1'>
 
