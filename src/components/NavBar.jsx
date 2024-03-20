@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export const NavBar = () => {
   return (
     <div>
-      <header className='w-screen py-5 md:h-32 bg-indigo-900 flex flex-col sm:px-5 md:px-10 relative items-center justify-center'>
+      <header className='w-screen py-5 md:h-32 bg-indigo-950 flex flex-col sm:px-5 md:px-10 relative items-center justify-center'>
 
       <div className='flex flex-col sm:flex-row w-full justify-between items-center gap-3'>
         
@@ -20,7 +20,7 @@ export const NavBar = () => {
       </div>
         
       </header>
-      <ul className='bg-indigo-950 w-full py-3 md:h-16 sm:h-12 sm:flex text-white justify-center gap-10 items-center text-xl font-semibold'>
+      <ul className='bg-slate-950 w-full py-3 md:h-16 sm:h-12 sm:flex text-white justify-center gap-10 items-center text-xl font-semibold'>
         <li className='cursor-pointer text-center'>Entre com seu cadastro</li>
         <li className='cursor-pointer text-center'>Fazer cadastro</li>
       </ul>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { auth, databaseApp } from '../configs/Firebase'
-import { addDoc, collection } from 'firebase/firestore'
 import InputMask from 'react-input-mask';
-import meninoLendo from '../assets/Book lover-bro.svg'
+import meninoLendo from '../assets/lendoLivros.svg'
+import axios from 'axios';
+import '../App.css'
 
 function CadAluno() {
 
@@ -16,7 +16,11 @@ function CadAluno() {
     let count = 0
     let somaCpf = 0
     let cpfFormatado = cpf.toString().slice(0, -2)
-    
+    const cpfSeparado = cpf.toString().split('')
+
+    if(cpfSeparado.every(num => num == cpf[0])){
+      return false
+    }
 
     for (let index = cpfFormatado.length + 1; index > 1; index--){
       somaCpf += cpfFormatado[count] * index
@@ -58,72 +62,67 @@ function CadAluno() {
       if (cpfIsValid(cpfOnlyNumbers)){
 
         if (nome == '' || cpf == '' || matricula == '') {
-          setError('Preencha corretamente os campos acima')
-        }else{
-          
-          const db = databaseApp
-
-          const cadAlunosCollection = collection(db, 'cadAlunos');
-
-          addDoc(cadAlunosCollection, {
-            nome: nome,
-            cpf: cpf,
-            matricula: matricula
-          })
-
-          setNome("")
-          setCpf("")
-          setMatricula("")
-          setError(null)
+          return setError('Preencha corretamente os campos acima')
         }
 
-        
+        fetch('http://localhost:4000/')
+          .then(response => response.json())
+          .then(response => console.log(response))
+          .catch(err => console.error(err));
 
       }else{
         setError("Cpf inválido")
       }
 
-      
     }
 
-    
   }
 
   return (
     
-    <div className="min-h-screen flex items-center justify-center bg-indigo-900 sm:p-5">
+    <div className="min-h-screen flex items-center justify-center bg-indigo-950 sm:p-5 z-0">
 
-      <div className='bg-indigo-500 h-[30rem] md:w-[30rem] hidden md:flex items-center justify-center rounded-l-xl'>
+      <div id='noise' className='w-screen h-screen fixed z-10 opacity-20 pointer-events-nonex '>
+
+      </div>
+
+      <div className='bg-indigo-900 h-[30rem] md:w-[25rem] hidden md:flex items-center justify-center z-20 shadow-2xl'>
         <img src={meninoLendo} className='w-96' alt="" />
       </div>
         
-      <form onSubmit={sendCad} className='bg-white shadow-2x p-10 h-[30rem] md:w-[30rem] rounded-xl md:rounded-l-none flex flex-col justify-evenly'>
+      <div className='bg-white shadow-2x p-8 sm:p-10 h-[30rem] md:w-[25rem] flex flex-col z-20 shadow-2xl'>
 
-        <p className='text-center font-semibold text-4xl mb-2'>Cadastro de aluno</p>
-          
-          <div className='w-full flex flex-col space-y-2'>
+        <form onSubmit={sendCad} className='w-full h-full flex flex-col justify-center'>
 
-            <div className='flex flex-col'>
-              <label htmlFor="nome">Nome Completo: </label>
-              <input value={nome} onChange={(e)=> setNome(e.target.value)} autoComplete='off' className='border-2 border-black px-2 py-1 rounded-sm' type="text" id='nome' required/>
+          <span className='inline-block'>
+            <p className='text-3xl mb-5 border-b-4 border-slate-700 inline-block'>Cadastro do aluno</p>
+          </span> 
+
+            <div className='w-full flex flex-col space-y-1'>
+
+              <div className='flex flex-col'>
+                <label htmlFor="nome">NOME COMPLETO: </label>
+                <input value={nome} onChange={(e)=> setNome(e.target.value)} autoComplete='off' className='border-neutral-700 px-2 py-1 rounded-sm outline-none border-b-2' type="text" id='nome' required/>
+              </div>
+                
+              <div className='flex flex-col'>
+                <label htmlFor="cpf">CPF: </label>
+                <InputMask mask='999.999.999-99' value={cpf} onChange={(e)=> setCpf(e.target.value)} autoComplete='off' className='border-neutral-700 px-2 py-1 rounded-sm outline-none border-b-2' type="text" id='cpf' required/>
+              </div>
+
+              <div className='flex flex-col'>
+                <label htmlFor="matricula">MATRÍCULA: </label>
+                <input value={matricula} onChange={(e)=> setMatricula(e.target.value)} autoComplete='off' className='border-neutral-700 px-2 py-1 rounded-sm outline-none border-b-2' type="text" id='matricula' required/>
+              </div>  
+
             </div>
-              
-            <div className='flex flex-col'>
-              <label htmlFor="cpf">Cpf: </label>
-              <InputMask mask='999.999.999-99' value={cpf} onChange={(e)=> setCpf(e.target.value)} autoComplete='off' className='border-2 border-black px-2 py-1 rounded-sm' type="text" id='cpf' required/>
-            </div>
 
-            <div className='flex flex-col'>
-              <label htmlFor="matricula">Matrícula: </label>
-              <input value={matricula} onChange={(e)=> setMatricula(e.target.value)} autoComplete='off' className='border-2 border-black px-2 py-1 rounded-sm' type="text" id='matricula' required/>
-            </div>  
+          <button type='submit' className='bg-gradient-to-r from-indigo-600 to-blue-600 border px-4 py-2 w-full rounded-sm text-white hover:bg-gradient-to-l mt-3'>Enviar</button>
+          {error && <p className='text-red-600 font-bold'>Erro: {error}</p>}
 
-          </div>
-
-        <button type='submit' className='bg-gradient-to-r from-indigo-600 to-blue-600 border px-4 py-2 w-full rounded-sm text-white hover:bg-gradient-to-l'>Enviar</button>
-        {error && <p className='text-red-600'>Erro: {error}</p>}
+        </form>
           
-      </form>
+      </div>
     </div>
        
     
