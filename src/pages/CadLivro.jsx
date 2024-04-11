@@ -1,52 +1,10 @@
-import { useState } from "react"
 import '../App.css'
 
-function AddLivro (){
-
-  const date = new Date
+function CadLivro (){
 
   function enviaform(e){
-
     e.preventDefault()
-    
-    if (ano > date.getFullYear()){
-      return alert(`Digite um data válida menor que ${date.getFullYear()}`)
-    }
-
-    if (nome === null){
-      return alert("Preencha todos os campos")
-    }
-
-    if(isbn === null){
-      return alert("Preencha todos os campos")
-    }
-
-    if(autor === null){
-      return alert("Preencha todos os campos")
-    }
-
-    if(editora === null){
-      return alert("Preencha todos os campos")
-    }
-
-
-    console.log(livro);
-
-}
-
-const [nome, setNome] = useState(null)
-const [isbn, setIsbn] = useState(null)
-const [autor, setAutor] = useState(null)
-const [editora, setEditora] = useState(null)
-const [ano, setAno] = useState(null)
-
-const livro ={
-    nome: nome,
-    isbn: isbn,
-    autor: autor,
-    editora: editora,
-    ano: Number(ano)
-}
+  }
 
 return (
     <>
@@ -90,4 +48,4 @@ return (
 
 }
 
-export default AddLivro
+export default CadLivro

@@ -1,14 +1,14 @@
-import AddLivro from "./pages/AddLivro"
-import CadAluno from "./pages/CadAluno"
-import { Home } from "./pages/Home"
-import LoginAluno from "./pages/LoginAluno"
+import {BrowserRouter} from "react-router-dom";
+import {Rotas} from "./routes/routes.jsx";
 
 function App (){
 
   return (
     <>
       <div>
-        <LoginAluno/>
+          <BrowserRouter>
+              <Rotas/>
+          </BrowserRouter>
       </div>
     </>
   )
