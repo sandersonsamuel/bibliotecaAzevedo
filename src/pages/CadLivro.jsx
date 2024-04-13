@@ -1,51 +1,73 @@
-import '../App.css'
+import {Input} from "../components/input/index.jsx";
+import {Button} from "../components/button/index.jsx";
+import {useEffect, useState} from "react";
 
-function CadLivro (){
+import { livro } from '../proxyState/index.js'
+import {useSnapshot} from "valtio";
 
-  function enviaform(e){
-    e.preventDefault()
-  }
+import isbn from 'node-isbn';
+import {cadLivro} from "../requisicoes/livro.js";
+import {resetLivro} from "../utils/index.js";
 
-return (
-    <>
-      <div id='noise' className='w-screen h-screen fixed z-10 opacity-20 pointer-events-none '>
+export const CadLivro = () => {
 
-      </div>
+    const snapLivro = useSnapshot(livro)
 
-      <div className="w-screen h-screen flex flex-col items-center bg-indigo-900 justify-center">
-      
-        <form onSubmit={enviaform} className="flex flex-col w-4/12 gap-2 bg-white px-16 py-12 z-20 shadow-2xl">
+    useEffect(() => {
+        if (snapLivro.isbn.length > 9){
+            isbn.resolve(snapLivro.isbn, (error, book)=>{
+                if (book) {
+                    livro.titulo = book.title ? book.title : "";
+                    livro.ano = book.publishedDate ? Number(book.publishedDate.substring(0, 4)) : null;
+                    livro.genero = book.categories && book.categories.length > 0 ? book.categories[0] : "";
+                    livro.autor = book.authors && book.authors.length > 0 ? book.authors[0] : "";
+                    livro.editora = book.publisher ? book.publisher : "";
+                }
+            })
+        }
+    }, [snapLivro.isbn]);
 
-          <span className="flex justify-center">
-            <span className='inline-block'>
-              <p className='text-3xl mb-5 border-b-4 border-slate-700 inline-block text-center'>Cadastro do livro</p>
-            </span>
-          </span>
+    const formSubmit = (e) =>{
+        e.preventDefault();
+        cadLivro()
+        resetLivro()
+    }
+
+    const [error, setError] = useState(null);
+
+    return (
+        <div className="h-screen w-full flex flex-col items-center justify-center">
+            <form onSubmit={formSubmit}
+                  className={'max-w-[800px] min-h-[500px] shadow-neutral-500'}>
+
+                <p className={'text-3xl font-semibold text-center mb-5'}>Cadastar livro</p>
+
+                <div className={'flex w-full gap-5'}>
+
+                    <Input type={'text'} label={'ISBN:'} onChange={(e)=> livro.isbn = e.target.value} value={snapLivro.isbn}/>
+                    <Input type={'text'} label={'Titulo:'} onChange={(e)=> livro.titulo = e.target.value} value={snapLivro.titulo}/>
+
+                </div>
+
+                <div className={'flex w-full gap-5'}>
+
+                    <Input type={'text'} label={'Editora:'} onChange={(e)=> livro.editora = e.target.value} value={snapLivro.editora}/>
+                    <Input type={'number'} label={'Ano:'} onChange={(e)=> livro.ano = e.target.value} value={snapLivro.ano}/>
+
+                </div>
+
+                <div className={'flex w-full gap-5'}>
+
+                    <Input type={'text'} label={'Genero:'} onChange={(e)=> livro.genero = e.target.value} value={snapLivro.genero}/>
+                    <Input type={'text'} label={'Autor:'} onChange={(e)=> livro.autor = e.target.value} value={snapLivro.autor}/>
+
+                </div>
 
 
-          <label htmlFor="livro">Nome:</label>
-          <input className="w-full h-8 px-2 py-1 outline-none border-b-2 border-neutral-700" id="livro" type="text" placeholder="Digite o nome do livro" onChange={(e) => setNome(e.target.value)} required autoComplete="off"/>
-          
-          <label htmlFor="isbn">ISBN:</label>
-          <input className="w-full h-8 px-2 py-1 outline-none border-b-2 border-neutral-700" id="isbn" type="text" placeholder="Digite o ISBN do livro" onChange={(e) => setIsbn(e.target.value)} required autoComplete="off"/>
+                {error && <p className={'text-red-500'}>{error}</p>}
+                <Button>Cadastrar</Button>
 
-          <label htmlFor="autor">Autor:</label>
-          <input className="w-full h-8 px-2 py-1 outline-none border-b-2 border-neutral-700" id="autor" type="text" placeholder="Digite o autor do livro" onChange={(e) => setAutor(e.target.value)} required autoComplete="off"/>
-
-          <label htmlFor="editora">Editora:</label>
-          <input className="w-full h-8 px-2 py-1 outline-none border-b-2 border-neutral-700" id="editora" type="text" placeholder="Digite a editora do livro" onChange={(e) => setEditora(e.target.value)} required autoComplete="off"/>
-
-          <label htmlFor="ano">Ano:</label>
-          <input className="w-full h-8 px-2 py-1 outline-none border-b-2 border-neutral-700" id="ano" type="number" placeholder="Digite o ano do livro" onChange={(e) => setAno(e.target.value)} required autoComplete="off"/>
-
-          <button className="px-4 py-2 bg-blue-700 text-white mt-5">Cadastrar</button>
-
-        </form>
-      </div>
-
-    </>
-)
-
-}
-
-export default CadLivro
+            </form>
+        </div>
+    );
+};
