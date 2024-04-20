@@ -1,10 +1,17 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
+import PropTypes from "prop-types";
 
 export const TextSelect = ({ label, placeholder, array, visibleItem, getId, id }) => {
 
     const [visible, setVisible] = useState(false);
 
     const [text, setText] = useState('');
+
+    useEffect(() => {
+        if (text.length == 0) {
+            getId(null)
+        }
+    }, [text]);
 
     const handleFocus = () => {
         setVisible(true)
@@ -63,3 +70,12 @@ export const TextSelect = ({ label, placeholder, array, visibleItem, getId, id }
         </div>
     );
 };
+
+TextSelect.propTypes = {
+    label: PropTypes.string,
+    placeholder: PropTypes.string,
+    getId: PropTypes.func,
+    id: PropTypes.number,
+    array: PropTypes.arrayOf(PropTypes.shape({})),
+    visibleItem: PropTypes.string,
+}

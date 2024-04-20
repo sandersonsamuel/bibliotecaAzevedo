@@ -3,9 +3,11 @@ import {Input} from "../components/input/index.jsx";
 import {Button} from "../components/button/index.jsx";
 import { cpf } from 'cpf-cnpj-validator'
 import {cadAluno} from "../requisicoes/aluno.js";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 export const CadAluno = () => {
+
+    const inputRef = useRef(null);
 
     const [aluno, setAluno] = useState({
         nome: '',
@@ -17,8 +19,14 @@ export const CadAluno = () => {
         setAluno({nome: '', cpf: '', email: ''})
     }
 
-    const [error, setError] = useState(null);
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, [inputRef]);
 
+
+    const [error, setError] = useState(null);
 
     const sendForm = (e) =>{
 
@@ -31,6 +39,11 @@ export const CadAluno = () => {
         cadAluno({nome: aluno.nome, email: aluno.email, cpf: aluno.cpf.replace(/\D/g, "")});
 
         resetAluno()
+
+        if (!inputRef.current) {
+            return;
+        }
+        inputRef.current.focus();
     }
 
   return (
@@ -40,7 +53,7 @@ export const CadAluno = () => {
 
             <p className={'text-3xl font-semibold text-center mb-10'}>Cadastrar Aluno</p>
 
-            <Input type={'text'} label={'Nome Completo:'} value={aluno.nome} onChange={(e)=> setAluno({...aluno, nome: e.target.value})}/>
+            <Input type={'text'} label={'Nome Completo:'} ref={inputRef} value={aluno.nome} onChange={(e)=> setAluno({...aluno, nome: e.target.value})}/>
             <Input type={'email'} label={'Email:'} value={aluno.email} onChange={(e)=> setAluno({...aluno, email: e.target.value})}/>
             <Input type={'text'} label={'CPF:'} value={aluno.cpf} onChange={(e)=> setAluno({...aluno, cpf: e.target.value})}/>
             {error && <p className={'text-red-500'}>{error}</p>}

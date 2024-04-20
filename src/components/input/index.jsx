@@ -1,8 +1,8 @@
-import {useRef} from "react";
+import {forwardRef, useRef} from "react";
 
-export const Input = ({type, label, placeholder, onChange, ref, value}) => {
+export const Input = forwardRef((props, ref) => {
 
-    const noRef = useRef(0);
+    const { type, label, placeholder, value, onChange, ...rest } = props
 
     return (
         <div className="my-4 w-full">
@@ -15,8 +15,8 @@ export const Input = ({type, label, placeholder, onChange, ref, value}) => {
                    value={value}
                    onChange={onChange}
                    autoComplete={'off'}
-                   ref={ref ? ref : noRef}
+                   ref={ref}
                    required/>
         </div>
     );
-};
+})

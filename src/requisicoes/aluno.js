@@ -3,7 +3,7 @@ import {api} from "../api/index.js";
 
 export const cadAluno = (aluno) => {
 
-    api.post('/cadAluno', aluno)
+    api.post('/cadastro/aluno', aluno)
         .then(() => {
             toast.success("Aluno Cadastrado!");
         }).catch((error) => {

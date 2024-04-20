@@ -1,8 +1,9 @@
 import {useEffect} from "react";
 import {getAllLivrosService} from "../services/livros.services.js";
-import {alunos, livros} from "../src/proxyState/index.js";
+import {alunos, emprestimos, livros} from "../src/proxyState/index.js";
 import {getAllAlunosService} from "../services/alunos.services.js";
 import {useLocation} from "react-router-dom";
+import {getAllEmprestimosService} from "../services/emprestimos.services.js";
 
 export const Provider = ({children}) =>{
 
@@ -13,6 +14,7 @@ export const Provider = ({children}) =>{
     }, [location]);
 
     const onloadData = async () =>{
+
         const livrosData = await getAllLivrosService();
 
         if (livrosData){
@@ -24,6 +26,10 @@ export const Provider = ({children}) =>{
         if (alunosData){
             alunos.data = alunosData
         }
+
+        //Manda pra um state global
+        getAllEmprestimosService()
+
     }
 
     return children

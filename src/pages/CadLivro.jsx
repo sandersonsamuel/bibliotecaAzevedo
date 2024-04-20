@@ -1,6 +1,6 @@
 import {Input} from "../components/input/index.jsx";
 import {Button} from "../components/button/index.jsx";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 import { livro } from '../proxyState/index.js'
 import {useSnapshot} from "valtio";
@@ -12,6 +12,8 @@ import {resetLivro} from "../utils/index.js";
 export const CadLivro = () => {
 
     const snapLivro = useSnapshot(livro)
+
+    const inputRef = useRef(null);
 
     useEffect(() => {
         if (snapLivro.isbn.length > 9){
@@ -31,6 +33,9 @@ export const CadLivro = () => {
         e.preventDefault();
         cadLivro()
         resetLivro()
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
     }
 
     const [error, setError] = useState(null);
@@ -44,7 +49,7 @@ export const CadLivro = () => {
 
                 <div className={'flex w-full gap-5'}>
 
-                    <Input type={'text'} label={'ISBN:'} onChange={(e)=> livro.isbn = e.target.value} value={snapLivro.isbn}/>
+                    <Input type={'text'} label={'ISBN:'} ref={inputRef} onChange={(e)=> livro.isbn = e.target.value} value={snapLivro.isbn}/>
                     <Input type={'text'} label={'Titulo:'} onChange={(e)=> livro.titulo = e.target.value} value={snapLivro.titulo}/>
 
                 </div>
