@@ -2,7 +2,7 @@ import '../App.css'
 import {Input} from "../components/input/index.jsx";
 import {Button} from "../components/button/index.jsx";
 import { cpf } from 'cpf-cnpj-validator'
-import {cadAluno} from "../requisicoes/aluno.js";
+import {cadAluno} from "../../requisicoes/aluno.js";
 import {useEffect, useRef, useState} from "react";
 
 export const CadAluno = () => {

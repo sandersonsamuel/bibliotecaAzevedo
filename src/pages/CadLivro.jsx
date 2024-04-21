@@ -2,11 +2,11 @@ import {Input} from "../components/input/index.jsx";
 import {Button} from "../components/button/index.jsx";
 import {useEffect, useRef, useState} from "react";
 
-import { livro } from '../proxyState/index.js'
+import { livro } from '../../proxyState/index.js'
 import {useSnapshot} from "valtio";
 
 import isbn from 'node-isbn';
-import {cadLivro} from "../requisicoes/livro.js";
+import {cadLivro} from "../../requisicoes/livro.js";
 import {resetLivro} from "../utils/index.js";
 
 export const CadLivro = () => {

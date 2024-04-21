@@ -1,34 +1,36 @@
 import'../App.css'
 import {Button} from "../components/button/index.jsx";
-import React from "react";
+import {Input} from "../components/input/index.jsx";
+import {useState} from "react";
+import {login} from "../../requisicoes/login.js";
 
 function Login(){
+
+    const [user ,setUser] = useState({
+        nome: '',
+        senha: ''
+    })
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(user.nome, user.senha);
+        login(user.nome, user.senha);
+
+    }
 
     return(
         <div className={'flex flex-col items-center justify-center w-screen h-screen bg-indigo-950'}>
 
-            <div id='noise' className='w-screen h-screen fixed z-10 opacity-20 pointer-events-none'>
-
-            </div>
-
-            <form className='w-2/5 z-20 bg-white px-24 py-16'>
-                <span className='inline-block'>
-                     <p className='text-3xl mb-5 border-b-4 border-slate-700 text-center'>Login</p>
+            <form onSubmit={handleSubmit} className='w-2/5 z-20 bg-white p-10'>
+                <span className='inline-block mb-3'>
+                     <p className='text-3xl border-b-4 border-blue-700 text-center'>Login</p>
                    </span>
 
-                <div className='flex flex-col'>
-                    <label htmlFor="text">Email</label>
-                    <input className="w-full h-8 px-2 py-1 outline-none border-b-2 border-neutral-700 bg-transparent" type="text"
-                           placeholder="Digite o email" required/>
-                </div>
+                <Input type={'text'} value={user.name} label={'Usuário'} onChange={(e)=> setUser({...user, nome: e.target.value})}/>
 
-                <div className='flex flex-col'>
-                    <label htmlFor="senha">Senha</label>
-                    <input className="w-full h-8 px-2 py-1 outline-none border-b-2 border-neutral-700 bg-transparent" type="text"
-                           placeholder="Digite a senha" required/>
-                </div>
+                <Input type={'password'} value={user.senha} label={'Senha'} onChange={(e)=> setUser({...user, senha: e.target.value})}/>
 
-                <Button>
+                <Button type={'onSubmit'}>
                     Enviar
                 </Button>
 

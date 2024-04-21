@@ -1,17 +1,21 @@
 import {useEffect} from "react";
 import {getAllLivrosService} from "../services/livros.services.js";
-import {alunos, emprestimos, livros} from "../src/proxyState/index.js";
+import {alunos, livros, User} from "../proxyState/index.js";
 import {getAllAlunosService} from "../services/alunos.services.js";
 import {useLocation} from "react-router-dom";
 import {getAllEmprestimosService} from "../services/emprestimos.services.js";
+import {useSnapshot} from "valtio";
 
 export const Provider = ({children}) =>{
 
     const location = useLocation()
+    const snapUser = useSnapshot(User)
 
     useEffect(() => {
-        onloadData()
-    }, [location]);
+
+        if (snapUser.isLoggedIn) onloadData()
+
+    }, [location, snapUser.isLoggedIn]);
 
     const onloadData = async () =>{
 

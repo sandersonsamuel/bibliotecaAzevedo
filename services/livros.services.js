@@ -1,4 +1,4 @@
-import {api} from "../src/api/index.js"
+import {api} from "../api/index.js"
 import {networkError} from "../src/utils/index.js";
 
 export const getAllLivrosService = async () => {

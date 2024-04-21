@@ -1,10 +1,10 @@
 import {Button} from "../components/button/index.jsx";
 import {useState} from "react";
-import {alunos, livros} from "../proxyState/index.js";
+import {alunos, livros} from "../../proxyState/index.js";
 import {useSnapshot} from "valtio";
 import {TextSelect} from "../components/textSelect/index.jsx";
 import moment from "moment";
-import {cadEmprestimo} from "../requisicoes/emprestimo.js";
+import {cadEmprestimo} from "../../requisicoes/emprestimo.js";
 import Dropdown from "react-dropdown";
 import 'react-dropdown/style.css';
 

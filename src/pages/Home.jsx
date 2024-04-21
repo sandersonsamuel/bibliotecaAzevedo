@@ -1,7 +1,7 @@
 import {Card} from "../components/card/Card.jsx";
 import {Link} from "react-router-dom";
 import {useSnapshot} from "valtio";
-import {emprestimos} from "../proxyState/index.js";
+import {emprestimos} from "../../proxyState/index.js";
 import ReactECharts from 'echarts-for-react';
 import moment from "moment";
 import 'moment/locale/pt-br';
@@ -12,7 +12,7 @@ export const Home = () => {
 
     const snapEmprestimos = useSnapshot(emprestimos)
 
-    const emprestimosVencidos = snapEmprestimos.getEmprestimosVencios(snapEmprestimos.data)
+    const emprestimosVencidos = snapEmprestimos.getEmprestimosVencidos(snapEmprestimos.data)
     const emprestimosAndamento = snapEmprestimos.getEmprestimosAndamento(snapEmprestimos.data)
 
     const emprestimosSemana = snapEmprestimos.getEmprestimosSemana(snapEmprestimos.data)

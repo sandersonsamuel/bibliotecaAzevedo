@@ -1,4 +1,4 @@
-import {livro} from "../proxyState/index.js";
+import {livro} from "../../proxyState/index.js";
 import toast from "react-hot-toast";
 
 export const networkError = (e) =>{

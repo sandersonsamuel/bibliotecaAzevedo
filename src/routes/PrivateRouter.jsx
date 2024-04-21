@@ -1,4 +1,4 @@
-import {User} from '../proxyState/index.js'
+import {User} from '../../proxyState/index.js'
 import {useSnapshot} from "valtio";
 import {Navigate} from "react-router-dom";
 import {Layout} from "../components/layout/index.jsx";

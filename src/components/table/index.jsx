@@ -1,17 +1,16 @@
 import moment from "moment";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Modal} from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
 import {Button} from "../button/index.jsx";
 import '../../App.css'
-import {devolverLivro, renovarEmprestimo} from "../../requisicoes/emprestimo.js";
+import {devolverLivro, renovarEmprestimo} from "../../../requisicoes/emprestimo.js";
 import {CgMoreVerticalO} from "react-icons/cg";
 import Dropdown from "react-dropdown";
 import classNames from "classnames";
 
-export const Table = ({list}) => {
+export const Table = ({list, action}) => {
 
-    console.log(list)
     const [open, setOpen] = useState(false)
     const [openDrop, setOpenDrop] = useState(false)
     const [openModalDevolver, setOpenModalDevolver] = useState(false)
@@ -23,8 +22,6 @@ export const Table = ({list}) => {
         titulo: '',
         data_devolucao: ''
     })
-
-    console.log(renovacao)
 
     const onCloseModal = () => {
         setOpen(false)
@@ -97,9 +94,12 @@ export const Table = ({list}) => {
                     <th scope="col" className="px-6 py-3">
                         Status
                     </th>
-                    <th scope="col" className="px-6 py-3">
-                        Ações
-                    </th>
+                    {
+                        action &&
+                        <th scope="col" className="px-6 py-3">
+                            Ações
+                        </th>
+                    }
                 </tr>
                 </thead>
                 <tbody>
@@ -132,12 +132,14 @@ export const Table = ({list}) => {
                                 {item.status}
                             </p>
                         </th>
-
-                        <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-xl fonr-bold relative">
-                            <button onClick={()=> openDropDown(item)} type={'button'} className={'rotate-90 text-blue-600'}>
-                                <CgMoreVerticalO/>
-                            </button>
-                        </th>
+                        {
+                            action &&
+                            <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-xl fonr-bold relative">
+                                <button onClick={()=> openDropDown(item)} type={'button'} className={'rotate-90 text-blue-600'}>
+                                    <CgMoreVerticalO/>
+                                </button>
+                            </th>
+                        }
 
                     </tr>
                 ))}

@@ -1,4 +1,4 @@
-import {forwardRef, useRef} from "react";
+import {forwardRef} from "react";
 
 export const Input = forwardRef((props, ref) => {
 

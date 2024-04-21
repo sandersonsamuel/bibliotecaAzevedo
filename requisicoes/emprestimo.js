@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import {api} from "../api/index.js";
-import {networkError} from "../utils/index.js";
+import {networkError} from "../src/utils/index.js";
 import moment from "moment";
 
 export const cadEmprestimo = (emprestimo) => {
