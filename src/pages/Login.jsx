@@ -11,10 +11,13 @@ function Login(){
         senha: ''
     })
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+
         e.preventDefault();
-        console.log(user.nome, user.senha);
-        login(user.nome, user.senha);
+        await login(user.nome, user.senha);
+        setTimeout(()=>{
+            location.href="/";
+        }, 2000)
 
     }
 
