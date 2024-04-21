@@ -15,6 +15,8 @@ export const Provider = ({children}) =>{
 
         if (snapUser.isLoggedIn) onloadData()
 
+        if(!snapUser.isLoggedIn) location.href="/login"
+
     }, [location, snapUser.isLoggedIn]);
 
     const onloadData = async () =>{
