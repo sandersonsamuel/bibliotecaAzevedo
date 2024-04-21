@@ -15,9 +15,6 @@ function Login(){
 
         e.preventDefault();
         await login(user.nome, user.senha);
-        setTimeout(()=>{
-            location.href="/";
-        }, 2000)
 
     }
 
