@@ -24,8 +24,6 @@ export const Home = () => {
     const emprestimosPorDiaSemanaData = [0, 0, 0, 0, 0, 0, 0]
     const emprestimosPorSemanaMesData = [0, 0, 0, 0]
 
-    console.log(snapEmprestimos.data)
-
     for (const data in snapEmprestimosPorDiaSemana) {
         const diaDaSemanaIndex = moment(data).weekday()
         emprestimosPorDiaSemanaData[diaDaSemanaIndex] += snapEmprestimosPorDiaSemana[data].length

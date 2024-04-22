@@ -34,9 +34,9 @@ export const Card = ({children, type, className}) => {
     return (
         <div className={classNames('p-5 border flex gap-3', styleCard.class, className)}>
             {styleCard.icon && <p className={'font-semibold text-lg'}>{styleCard.icon}</p>}
-            <p>
+            <div>
                 {children}
-            </p>
+            </div>
         </div>
     );
 };

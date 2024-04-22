@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import PropTypes from "prop-types";
 
 export const TextSelect = ({ label, placeholder, array, visibleItem, getId, id }) => {
 
