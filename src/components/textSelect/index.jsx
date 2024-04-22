@@ -70,12 +70,3 @@ export const TextSelect = ({ label, placeholder, array, visibleItem, getId, id }
         </div>
     );
 };
-
-TextSelect.propTypes = {
-    label: PropTypes.string,
-    placeholder: PropTypes.string,
-    getId: PropTypes.func,
-    id: PropTypes.number,
-    array: PropTypes.arrayOf(PropTypes.shape({})),
-    visibleItem: PropTypes.string,
-}
