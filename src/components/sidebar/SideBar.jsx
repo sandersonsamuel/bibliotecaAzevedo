@@ -1,12 +1,20 @@
 import {SideBarItem} from "./SideBarItem.jsx";
 import {FaHistory, FaHome, FaUser} from "react-icons/fa";
-import { IoIosJournal } from "react-icons/io";
 import { FaBook } from "react-icons/fa";
 import { FaHandshake } from "react-icons/fa";
-import { MdManageAccounts } from "react-icons/md";
+import {MdExitToApp, MdManageAccounts} from "react-icons/md";
+import {useState} from "react";
+import {Modal} from "react-responsive-modal";
+import {Button} from "../button/index.jsx";
 
 export const SideBar = ({children}) => {
 
+    const [modalDesconectar, setModalDesconectar] = useState(false)
+
+    const handleLogOut = () =>{
+        localStorage.clear()
+        location.reload();
+    }
 
     const sideBarItems = [
         {
@@ -52,6 +60,20 @@ export const SideBar = ({children}) => {
                     <p>
                         {'Biblioteca Azevedo'}
                     </p>
+
+                    <p className={'text-red-500 text-2xl cursor-pointer'} title={'Desconectar usuário'}>
+                        <MdExitToApp onClick={()=> setModalDesconectar(true)} />
+                    </p>
+
+                    <Modal open={modalDesconectar} onClose={()=> setModalDesconectar(false)}>
+                        <p className={'text-xl px-5 mr-5'}>Tem certeza que deseja se desconectar da aplicação?</p>
+
+                        <div className={'flex gap-2 items-end'}>
+                            <Button onClick={()=> setModalDesconectar(false)}>Cancelar</Button>
+                            <Button onClick={handleLogOut}>Desconectar</Button>
+                        </div>
+                    </Modal>
+
                 </div>
 
                 <div>

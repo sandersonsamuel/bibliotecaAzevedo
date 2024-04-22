@@ -10,7 +10,6 @@ export const login = (nome, senha) =>{
             senha: senha
         }).then((response) => {
             toast.success("Login efetuado com sucesso!");
-            User.isLoggedIn = true
             localStorage.setItem("accessToken", response.data.token);
             setTimeout(()=>{
                 location.href="/"
