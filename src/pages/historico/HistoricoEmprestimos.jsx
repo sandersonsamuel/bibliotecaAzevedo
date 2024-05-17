@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Table } from "../components/table/index.jsx";
+import { Table } from "../../components/table/index.jsx";
 import Dropdown from "react-dropdown";
 import { useSnapshot } from "valtio";
-import { emprestimos } from "../../proxyState/index.js";
+import { emprestimos } from "../../../proxyState/index.js";
 
 export const HistoricoEmprestimos = () => {
 

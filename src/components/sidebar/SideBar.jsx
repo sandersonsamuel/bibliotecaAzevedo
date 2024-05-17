@@ -34,7 +34,7 @@ export const SideBar = ({children}) => {
             ]
         },
         {
-            name: 'Cadastrar Livro',
+            name: 'Livro',
             icon: <FaBook/>,
             option: [
                 {name: 'Cadastrar Livro', path: '/cadastro/livro'},
@@ -42,11 +42,11 @@ export const SideBar = ({children}) => {
             ]
         },
         {
-            name: 'Registrar Emprestimo',
+            name: 'Emprestimo',
             icon: <FaHandshake/>,
             option: [
-                {name: 'Cadastrar Emprestimo', path: '/cadastro/emprestimo'},
-                {name: 'Gerenciar Emrpestimo', path: '/gerenciar/emprestimo'},
+                {name: 'Cadastrar Empréstimo', path: '/cadastro/emprestimo'},
+                {name: 'Gerenciar Empréstimo', path: '/gerenciar/emprestimo'},
                 {name: 'Historico Empréstimos', path: '/historico/emprestimo'}
             ]
         }
@@ -55,7 +55,7 @@ export const SideBar = ({children}) => {
     return (
         <div className="flex">
 
-            <aside className={'h-screen bg-slate-900'}>
+            <aside className={'h-screen bg-slate-900 max-w-[250px] min-w-[250px]'}>
 
                 <nav className={'h-full flex flex-col'}>
 
