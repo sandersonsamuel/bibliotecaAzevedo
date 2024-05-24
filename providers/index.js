@@ -13,9 +13,11 @@ export const Provider = ({children}) =>{
 
     useEffect(() => {
 
-        if (snapUser.isLoggedIn) onloadData()
-
-        if(!snapUser.isLoggedIn) location.href="/login"
+        if (snapUser.isLoggedIn){
+            onloadData()
+        }else{
+            location.href = "/login"
+        }
 
     }, [location, snapUser.isLoggedIn]);
 

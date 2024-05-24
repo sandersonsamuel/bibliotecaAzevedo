@@ -5,8 +5,8 @@ import moment from "moment";
 
 export const getAllEmprestimosService = async () => {
 
-    try{
-        const response = await api.get('alunos/emprestimos');
+    try {
+        const response = await api.get('/emprestimos');
         const emprestimosData = response.data.map(emprestimo => ({
             ...emprestimo,
             data_emprestimo: moment(emprestimo.data_emprestimo).add(1, 'day').format('YYYY-MM-DD'),

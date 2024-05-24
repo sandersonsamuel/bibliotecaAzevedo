@@ -1,5 +1,5 @@
 import moment from "moment";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Modal} from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
 import {Button} from "../button/index.jsx";
@@ -8,6 +8,7 @@ import {devolverLivro, renovarEmprestimo} from "../../../requisicoes/emprestimo.
 import {CgMoreVerticalO} from "react-icons/cg";
 import Dropdown from "react-dropdown";
 import classNames from "classnames";
+import {FiPlusCircle} from "react-icons/fi";
 
 export const Table = ({list, action}) => {
 
@@ -29,45 +30,49 @@ export const Table = ({list, action}) => {
     }
 
     const openDropDown = (item) =>{
+
         setOpenDrop(true)
+
         setRenovacao({
-            id: item.id_emprestimo,
-            nome: item.nome,
-            titulo: item.titulo,
+            id: item.id,
+            nome: item.aluno.nome,
+            titulo: item.livro.titulo,
             data_devolucao: tempoEmprestimo,
         })
     }
 
+    useEffect(() => {
+        if (tempoEmprestimo == null){
+            setTempoEmprestimo(defaultValue)
+        }
+    }, [tempoEmprestimo]);
+
     const handleDevolverLivro = async (e) => {
         e.preventDefault()
         await devolverLivro(renovacao.id)
-        setTimeout(()=>{
-            location.reload()
-        }, [1000])
     }
 
     const handleRenovarEmprestimo = async (e) => {
         e.preventDefault();
         await renovarEmprestimo(tempoEmprestimo, renovacao.id)
-        setTimeout(()=>{
-            location.reload()
-        }, [1000])
     }
 
     const selectData = [
         {
             label: '1 Semana',
-            value: moment().add(1, 'week').format('YYYY-MM-DD'),
+            value: moment().add(1, 'week').toISOString(),
         },
         {
             label: '2 Semanas',
-            value: moment().add(2, 'weeks').format('YYYY-MM-DD'),
+            value: moment().add(2, 'weeks').toISOString(),
         },
         {
             label: '1 Mês',
-            value: moment().add(1, 'month').format('YYYY-MM-DD'),
+            value: moment().add(1, 'month').toISOString(),
         }
     ]
+
+    const defaultValue = selectData[0].value
 
 
     return (
@@ -108,11 +113,11 @@ export const Table = ({list, action}) => {
                     <tr key={index} className="bg-white border-b">
 
                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            {item.titulo}
+                            {item.livro.titulo}
                         </th>
 
                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            {item.nome}
+                            {item.aluno.nome}
                         </th>
 
                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
@@ -127,16 +132,16 @@ export const Table = ({list, action}) => {
                             {item.renovacoes}
                         </th>
 
-                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
-                            <p className={classNames(item.status == 'Devolvido' ? 'text-green-600' : 'text-yellow-600')}>
-                                {item.status}
+                        <th scope="row" className="px-6 py-4 font-bold text-sm text-gray-900 whitespace-nowrap text-center">
+                            <p className={classNames(item.status == 'devolvido' ? 'text-green-600' : 'text-yellow-600')}>
+                                {item.status.toUpperCase()}
                             </p>
                         </th>
                         {
                             action &&
                             <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-xl fonr-bold relative">
                                 <button onClick={()=> openDropDown(item)} type={'button'} className={'rotate-90 text-blue-600'}>
-                                    <CgMoreVerticalO/>
+                                    <FiPlusCircle/>
                                 </button>
                             </th>
                         }
@@ -169,7 +174,7 @@ export const Table = ({list, action}) => {
                         é: <b>{renovacao.titulo}</b>.
                         O livro deverá ser entrege novamente em um prazo de:
                     </p>
-                    <Dropdown options={selectData} onChange={(option) => setTempoEmprestimo(option.value)} value={selectData[0].value} placeholder="Select an option" />
+                    <Dropdown options={selectData} onChange={(option) => setTempoEmprestimo(option.value)} placeholder="Selecione um Opção" />
                     <Button>Renovar</Button>
                 </form>
             </Modal>

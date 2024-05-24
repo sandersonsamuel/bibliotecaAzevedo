@@ -1,7 +1,7 @@
 import {livro} from "../../proxyState/index.js";
 import toast from "react-hot-toast";
 
-export const networkError = (e) =>{
+export const networkError = (e) => {
         console.log(e)
         toast.error("Network Error");
 }

@@ -2,7 +2,7 @@ import {useState} from "react";
 import {alunos, emprestimos} from "../../../proxyState/index.js";
 import {useSnapshot} from "valtio";
 import {TextSelect} from "../../components/textSelect/index.jsx";
-import {Table} from "../../components/table/index.jsx";
+import {Table} from "../../components/tableAnt/index.jsx";
 
 export const GerenciarEmprestimos = () => {
 

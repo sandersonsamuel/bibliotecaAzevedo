@@ -1,28 +1,28 @@
 import {Link, useLocation} from "react-router-dom";
 import classNames from "classnames";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
-export const SideBarItem = ({icon, name, options}) => {
+export const SideBarItem = ({icon, name, option}) => {
 
     const local = useLocation().pathname
     const [showOpt, setShowOpt] = useState(false)
 
     return (
-        <div onClick={() => setShowOpt(!showOpt)} className={classNames("w-full flex flex-col justify-center text-white cursor-pointer hover:bg-slate-800", showOpt && 'bg-slate-800')}>
+        <div className={classNames("w-full flex flex-col justify-center text-white cursor-pointer")}>
 
-            <div className={classNames('flex gap-3 items-center px-4 my-3')}>
+            <Link to={!option && '/'} onClick={() => setShowOpt(!showOpt)} className={classNames('flex gap-3 items-center px-4 my-3')}>
                 <p className={'text-2xl'}>{icon}</p>
                 <p>{name}</p>
-            </div>
+            </Link>
 
             {
-                options &&
+                option &&
 
-                <div className={'flex flex-col bg-slate-800'}>
+                <div className={'flex flex-col'}>
                     {
-                        showOpt && options.map((item, index) => (
+                        showOpt && option.map((item, index) => (
                             <Link key={index} to={item.path}
-                                  className={classNames("py-3 border-b border-slate-600 px-4 hover:bg-slate-700")}>{item.name}</Link>
+                                  className={classNames("py-3 border-b border-slate-600 px-4 hover:bg-slate-800")}>{item.name}</Link>
                         ))
                     }
                 </div>

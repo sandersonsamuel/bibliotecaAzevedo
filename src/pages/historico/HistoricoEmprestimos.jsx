@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Table } from "../../components/table/index.jsx";
+import { useState, useEffect } from "react";
+import { Table } from "../../components/tableAnt/index.jsx";
 import Dropdown from "react-dropdown";
 import { useSnapshot } from "valtio";
 import { emprestimos } from "../../../proxyState/index.js";

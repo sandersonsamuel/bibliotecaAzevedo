@@ -8,7 +8,7 @@ const dataInicioMes = moment().startOf('month');
 const dataFimMes = moment().endOf('month');
 
 export const User = proxy({
-    isLoggedIn: localStorage.getItem('accessToken'),
+    isLoggedIn: localStorage.getItem("accessToken"),
 })
 
 export let alunos = proxy({
@@ -25,10 +25,13 @@ export const emprestimos = proxy({
         return this.data.filter(emprestimo => emprestimo.id_aluno == id)
     },
     getEmprestimosVencidos: function (data){
-        return data.filter(emprestimo => moment(emprestimo.data_devolucao).isBefore(moment()) && emprestimo.status !== 'Devolvido')
+        return data.filter(emprestimo => moment(emprestimo.data_devolucao).isBefore(moment()) && emprestimo.status !== 'devolvido')
+    },
+    getEmprestimosDevolvidos: function (data){
+        return data.filter(emprestimo => emprestimo.status == 'devolvido')
     },
     getEmprestimosAndamento: function (data){
-        return data.filter(emprestimo => emprestimo.status == 'Emprestado')
+        return data.filter(emprestimo => emprestimo.status == 'emprestado')
     },
     getEmprestimosSemana: function (data){
         return data.filter(emprestimo=> moment(emprestimo.data_emprestimo).isBetween(dataInicioSemana, dataFimSemana, null, '[]'))

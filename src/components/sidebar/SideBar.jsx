@@ -7,6 +7,7 @@ import {useState} from "react";
 import {Modal} from "react-responsive-modal";
 import {Button} from "../button/index.jsx";
 import bookIcon from "../../assets/book.svg";
+import {IoIosExit} from "react-icons/io";
 
 export const SideBar = ({children}) => {
 
@@ -67,15 +68,17 @@ export const SideBar = ({children}) => {
                     <Modal open={modalDesconectar} onClose={() => setModalDesconectar(false)}>
                         <p className={'text-xl px-5 mr-5'}>Tem certeza que deseja se desconectar da aplicação?</p>
 
-                        <div className={'flex gap-2 items-end'}>
-                            <Button onClick={() => setModalDesconectar(false)}>Cancelar</Button>
-                            <Button onClick={handleLogOut}>Desconectar</Button>
-                        </div>
+                        <Button onClick={handleLogOut}>Sim, sair</Button>
                     </Modal>
+
+                    <div onClick={()=> setModalDesconectar(true)} className={'text-red-500 flex gap-3 text-lg items-center px-5 pt-2 cursor-pointer'}>
+                        <IoIosExit />
+                        <p>Sair</p>
+                    </div>
 
                     <div className={'text-sm'}>
                         {sideBarItems.map((item, index) => (
-                            <SideBarItem key={index} icon={item.icon} name={!sidebarIsOpen && item.name} options={item.option}/>
+                            <SideBarItem key={index} icon={item.icon} name={!sidebarIsOpen && item.name} option={item.option}/>
                         ))}
                     </div>
 

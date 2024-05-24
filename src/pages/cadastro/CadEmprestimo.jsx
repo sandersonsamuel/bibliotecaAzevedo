@@ -22,16 +22,12 @@ export const CadEmprestimo = () => {
         e.preventDefault()
 
         const aluno = {
-            id_aluno: idAluno,
-            id_livro: idLivro,
-            data_devolucao: tempoEmprestimo
+            id_aluno: Number(idAluno),
+            id_livro: Number(idLivro),
+            data_devolucao: new Date (tempoEmprestimo)
         }
 
         cadEmprestimo(aluno)
-
-        setTimeout(()=>{
-            location.reload()
-        }, [1000])
 
     }
 
@@ -59,9 +55,9 @@ export const CadEmprestimo = () => {
 
                 <div className={'flex flex-col w-full'}>
 
-                    <TextSelect label={'Aluno: '} type={'text'} array={snapAlunos.data} visibleItem={'nome'} getId={setIdAluno} id={'id_aluno'} />
+                    <TextSelect label={'Aluno: '} type={'text'} array={snapAlunos.data} visibleItem={'nome'} getId={setIdAluno} id={'id'} />
 
-                    <TextSelect label={'Livro: '} type={'text'} array={snapLivros.data} visibleItem={'titulo'} getId={setIdLivro} id={'id_livro'} />
+                    <TextSelect label={'Livro: '} type={'text'} array={snapLivros.data} visibleItem={'titulo'} getId={setIdLivro} id={'id'} />
 
                     <Dropdown options={selectData} onChange={(option) => setTempoEmprestimo(option.value)} value={selectData[0].value} placeholder="Select an option" />
 
