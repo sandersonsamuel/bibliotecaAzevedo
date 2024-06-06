@@ -7,7 +7,6 @@ export const networkError = (e) => {
 }
 
 export const resetLivro = () =>{
-
         livro.isbn = '',
         livro.titulo = '',
         livro.editora = '',
