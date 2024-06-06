@@ -1,5 +1,6 @@
 import {api} from "../api/index.js";
 import toast from "react-hot-toast";
+import {networkError} from "../src/utils/index.js";
 
 export const login = (nome, senha) =>{
     api.post("/login", {
@@ -12,6 +13,6 @@ export const login = (nome, senha) =>{
             location.href="/"
         }, 2000)
     }).catch((error) => {
-        toast.error(error.response.data.message);
+        networkError(error)
     })
 }
