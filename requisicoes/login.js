@@ -13,6 +13,11 @@ export const login = (nome, senha) =>{
             location.href="/"
         }, 2000)
     }).catch((error) => {
+
+        if (error.response.status === 401) {
+            return toast.error("Usuário ou senha inválidos");
+        }
+
         networkError(error)
     })
 }
