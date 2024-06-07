@@ -5,7 +5,6 @@ import 'react-responsive-modal/styles.css';
 import {Button} from "../button/index.jsx";
 import '../../App.css'
 import {devolverLivro, renovarEmprestimo} from "../../../requisicoes/emprestimo.js";
-import {CgMoreVerticalO} from "react-icons/cg";
 import Dropdown from "react-dropdown";
 import classNames from "classnames";
 import {FiPlusCircle} from "react-icons/fi";
@@ -133,7 +132,7 @@ export const Table = ({list, action}) => {
                         </th>
 
                         <th scope="row" className="px-6 py-4 font-bold text-sm text-gray-900 whitespace-nowrap text-center">
-                            <p className={classNames(item.status == 'devolvido' ? 'text-green-600' : 'text-yellow-600')}>
+                            <p className={classNames(item.status === 'devolvido' ? 'text-green-600' : 'text-yellow-600')}>
                                 {item.status.toUpperCase()}
                             </p>
                         </th>

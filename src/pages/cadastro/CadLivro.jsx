@@ -31,7 +31,14 @@ export const CadLivro = () => {
 
     const formSubmit = (e) =>{
         e.preventDefault();
-        cadLivro()
+        cadLivro({
+            isbn: snapLivro.isbn,
+            titulo: snapLivro.titulo,
+            editora: snapLivro.editora,
+            ano: snapLivro.ano,
+            genero: snapLivro.genero,
+            autor: snapLivro.autor
+        })
         resetLivro()
         if (inputRef.current) {
             inputRef.current.focus();

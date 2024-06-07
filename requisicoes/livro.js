@@ -1,9 +1,8 @@
 import toast from "react-hot-toast";
 import {api} from "../api/index.js";
-import {livro} from "../proxyState/index.js";
 import {networkError} from "../src/utils/index.js";
 
-export const cadLivro = () =>{
+export const cadLivro = (livro) =>{
 
     api.post("/livro", livro)
         .then(response => {
